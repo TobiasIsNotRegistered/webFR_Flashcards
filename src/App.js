@@ -1,26 +1,34 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import Header from './app/Header.js';
+import Footer from './app/Footer.js';
+import QuestionnaireContainer from './questionnaire/QuestionnaireContainer';
 import './App.css';
+import Footer2 from './app/Footer2.js';
+
 
 class App extends Component {
+constructor(props){
+  super(props);
+  this.state = {
+    appTitle:"Flashcard Client with React",
+    appSubTitle:"Version 1",
+    questionnaires : [],
+    amountOfQuestionnaires: 0,
+  }
+}
+
+setAmountOfQuestionnaires = (amount) => {
+  this.setState({amountOfQuestionnaires: amount});
+}
+
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+        <Header title={this.state.appTitle} subtitle={this.state.appSubTitle}></Header>
+        <QuestionnaireContainer setAmountOfQuestionnaires={(amount) => this.setAmountOfQuestionnaires(amount)} />
+        <Footer content={{leftMessage: "@ The FHNW Team", rightMessage: "Total of " + this.state.amountOfQuestionnaires + " questionnaires"}} /> 
+        <Footer2 />
+        </div>
     );
   }
 }
